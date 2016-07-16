@@ -9,7 +9,7 @@ import java.io.IOException;
 public class Joke {
     private static MyApi myApiService = null;
 
-    public String getJoke(String name){
+    public String getJoke(String name) throws IOException {
         if(myApiService == null) {  // Only do this once
             MyApi.Builder builder = new MyApi.Builder(AndroidHttp.newCompatibleTransport(), new AndroidJsonFactory(), null)
                     .setRootUrl("https://backend-lab.appspot.com/_ah/api/");
@@ -20,7 +20,7 @@ public class Joke {
         try {
             return myApiService.sayHi(name).execute().getData();
         } catch (IOException e) {
-            return e.getMessage();
+            throw new IOException(e);
         }
     }
 }
