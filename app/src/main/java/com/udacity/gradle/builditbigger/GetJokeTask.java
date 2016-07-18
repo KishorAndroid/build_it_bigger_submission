@@ -39,14 +39,6 @@ public class GetJokeTask extends AsyncTask<String,Void,String> {
         if(listener!=null){
             listener.onAsyncResponse(joke);
         }
-        if(!joke.isEmpty()) {
-            Intent jokeIntent = new Intent(mContext, JokeActivity.class);
-            jokeIntent.putExtra("JOKE", joke);
-            jokeIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            mContext.startActivity(jokeIntent);
-        } else {
-            Toast.makeText(mContext, "Connection Error", Toast.LENGTH_LONG).show();
-        }
     }
 
     AsyncTaskResponseListener listener;

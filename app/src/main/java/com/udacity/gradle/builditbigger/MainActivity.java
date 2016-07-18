@@ -1,13 +1,19 @@
 package com.udacity.gradle.builditbigger;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
+
+import jokeapp.kishor_android.example.com.jokepresenter.JokeActivity;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity implements GetJokeTask.AsyncTaskResponseListener{
+
+    GetJokeTask getJokeTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +45,20 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void tellJoke(View view){
-        new GetJokeTask(this).execute("Kishor");
+        getJokeTask = new GetJokeTask(this);
+        getJokeTask.setAsyncTaskResponseListener(this);
+        getJokeTask.execute("Kishor");
     }
 
+    @Override
+    public void onAsyncResponse(String joke) {
+        if(!joke.isEmpty()) {
+            Intent jokeIntent = new Intent(this, JokeActivity.class);
+            jokeIntent.putExtra("JOKE", joke);
+            jokeIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(jokeIntent);
+        } else {
+            Toast.makeText(this, "Connection Error", Toast.LENGTH_LONG).show();
+        }
+    }
 }

@@ -20,6 +20,15 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    productFlavors{
+        free{
+
+        }
+        paid{
+
+        }
+    }
 }
 
 dependencies {
@@ -30,4 +39,5 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.3.0'
     compile 'com.google.android.gms:play-services:8.4.0'
     compile 'com.android.support:multidex:1.0.0'
+    freeCompile 'com.google.android.gms:play-services-ads:8.4.0'
 }
