@@ -47,7 +47,7 @@ public class MainActivity extends ActionBarActivity implements GetJokeTask.Async
     public void tellJoke(View view){
         getJokeTask = new GetJokeTask(this);
         getJokeTask.setAsyncTaskResponseListener(this);
-        getJokeTask.execute("Kishor");
+        getJokeTask.execute();
     }
 
     @Override

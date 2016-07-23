@@ -14,7 +14,6 @@ public class JokeFetchAsyncTaskTest extends InstrumentationTestCase implements G
     CountDownLatch latch;
     GetJokeTask getJokeTask;
     Context context;
-    private final String TEST_NAME = "TEST";
 
     @Override
     protected void setUp() throws Exception {
@@ -29,7 +28,7 @@ public class JokeFetchAsyncTaskTest extends InstrumentationTestCase implements G
         runTestOnUiThread(new Runnable() {
                               @Override
                               public void run() {
-                                  getJokeTask.execute(TEST_NAME);
+                                  getJokeTask.execute();
                                   try {
                                       latch.await(30, TimeUnit.SECONDS);
                                   } catch (InterruptedException e) {
@@ -42,6 +41,6 @@ public class JokeFetchAsyncTaskTest extends InstrumentationTestCase implements G
 
     @Override
     public void onAsyncResponse(String joke) {
-        assertEquals("Hi, " + TEST_NAME, joke);
+        assertEquals(false, joke.isEmpty());
     }
 }

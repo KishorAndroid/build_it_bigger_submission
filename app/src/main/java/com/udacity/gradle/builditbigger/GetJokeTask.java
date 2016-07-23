@@ -14,7 +14,7 @@ import jokeapp.kishor_android.example.com.jokepresenter.JokeActivity;
 /**
  * Created by kishor on 12/7/16.
  */
-public class GetJokeTask extends AsyncTask<String,Void,String> {
+public class GetJokeTask extends AsyncTask<Void,Void,String> {
 
     private Context mContext;
 
@@ -23,10 +23,10 @@ public class GetJokeTask extends AsyncTask<String,Void,String> {
     }
 
     @Override
-    protected String doInBackground(String... strings) {
+    protected String doInBackground(Void... voids) {
         Joke joke = new Joke();
         try {
-            return joke.getJoke(strings[0]);
+            return joke.getJoke();
         } catch (IOException e) {
             e.printStackTrace();
             return "";
