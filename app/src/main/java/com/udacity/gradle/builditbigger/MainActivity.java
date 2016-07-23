@@ -1,5 +1,6 @@
 package com.udacity.gradle.builditbigger;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -14,11 +15,16 @@ import jokeapp.kishor_android.example.com.jokepresenter.JokeActivity;
 public class MainActivity extends ActionBarActivity implements GetJokeTask.AsyncTaskResponseListener{
 
     GetJokeTask getJokeTask;
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setIndeterminate(true);
+        progressDialog.setMessage(getResources().getString(R.string.fetch_joke));
     }
 
 
@@ -47,6 +53,7 @@ public class MainActivity extends ActionBarActivity implements GetJokeTask.Async
     public void tellJoke(View view){
         getJokeTask = new GetJokeTask(this);
         getJokeTask.setAsyncTaskResponseListener(this);
+        progressDialog.show();
         getJokeTask.execute();
     }
 
@@ -60,5 +67,6 @@ public class MainActivity extends ActionBarActivity implements GetJokeTask.Async
         } else {
             Toast.makeText(this, "Connection Error", Toast.LENGTH_LONG).show();
         }
+        progressDialog.dismiss();
     }
 }
