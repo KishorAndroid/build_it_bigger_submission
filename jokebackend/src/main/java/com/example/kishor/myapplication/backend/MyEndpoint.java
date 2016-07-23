@@ -10,6 +10,8 @@ import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiNamespace;
 
+import java.util.Random;
+
 import javax.inject.Named;
 
 /** An endpoint class we are exposing */
@@ -24,11 +26,17 @@ import javax.inject.Named;
 )
 public class MyEndpoint {
 
+    String[] geekOneliners = {"If at first you don't succeed; call it version 1.0",
+        "The code that is the hardest to debug is the code that you know cannot possibly be wrong",
+        "Bugs come in through open Windows",
+        "CAPS LOCK – Preventing Login Since 1980"};
+
     /** A simple endpoint method that takes a name and says Hi back */
-    @ApiMethod(name = "sayHi")
-    public MyBean sayHi(@Named("name") String name) {
+    @ApiMethod(name = "getJoke")
+    public MyBean getJoke() {
         MyBean response = new MyBean();
-        response.setData("Hi, " + name);
+        String joke = geekOneliners[(new Random().nextInt(3))];
+        response.setData(joke);
 
         return response;
     }
