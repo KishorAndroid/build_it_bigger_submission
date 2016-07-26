@@ -1,6 +1,6 @@
 # Gradle for Android and Java Final Project
 
-In this project, I have create an app with multiple flavors that uses
+In this project, I have created an app with multiple flavors that uses
 multiple libraries and Google Could Endpoints. The finished app consists
 of four modules. A Java library that provides jokes, a Google Could Endpoints
 (GCE) project that serves those jokes, an Android Library containing an
